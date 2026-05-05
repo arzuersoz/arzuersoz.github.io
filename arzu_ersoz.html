@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arzu Ersöz — Professor of Biochemistry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf9f6; --fg: #1a1a1a; --muted: #6b6b6b;
+    --accent: #8b3a2a; --accent2: #c47d5e;
+    --border: #e0ddd8; --card: #ffffff; --hover: #f4f1ec;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--fg); font-size: 15px; line-height: 1.65; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,249,246,0.94); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 56px;
+  }
+  .nav-brand { font-family: 'EB Garamond', serif; font-size: 1.1rem; font-weight: 500; color: var(--fg); text-decoration: none; }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid; grid-template-columns: 1fr 300px; gap: 0;
+    min-height: 92vh; max-width: 1100px; margin: 0 auto;
+    padding: 5rem 2rem 4rem; align-items: center;
+  }
+  .hero-text { padding-right: 3rem; }
+  .hero-affils { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
+  .affil-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500; }
+  .affil-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
+  h1 { font-family: 'EB Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 500; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+  .hero-subtitle { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: var(--muted); font-style: italic; margin-bottom: 1.4rem; }
+  .hero-summary { font-size: 0.93rem; color: var(--muted); max-width: 520px; margin-bottom: 1.6rem; line-height: 1.78; }
+  .hero-links-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; align-items: center; }
+  .hero-links-row a { color: var(--accent); text-decoration: none; font-size: 0.87rem; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 0.3rem; }
+  .hero-links-row a:hover { opacity: 0.7; }
+  .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem; border-radius: 4px; font-size: 0.82rem; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+  .btn-primary { background: var(--accent); color: #fff; border: none; }
+  .btn-primary:hover { background: #732f21; }
+  .btn-outline { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+  .btn-outline:hover { background: var(--hover); border-color: var(--muted); }
+
+  /* ── SIDEBAR ── */
+  .hero-sidebar { display: flex; flex-direction: column; gap: 1.25rem; align-items: stretch; }
+  .hero-image-wrap { position: relative; }
+  .hero-image-wrap::before { content: ''; position: absolute; inset: -10px -7px -7px -10px; border: 1px solid var(--accent2); opacity: 0.3; border-radius: 2px; z-index: 0; }
+  .hero-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 2px; display: block; position: relative; z-index: 1; }
+
+  /* ESTÜ badge */
+  .estu-badge { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1.1rem; display: flex; align-items: center; gap: 0.85rem; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; }
+  .estu-badge:hover { border-color: #8b1a1a; box-shadow: 0 2px 12px rgba(139,26,26,0.07); }
+  .estu-logo-wrap { height: 32px; display: flex; align-items: center; flex-shrink: 0; }
+  .estu-logo-wrap img { height: 32px; width: auto; display: block; }
+  /* hide the text portion — logo already has it */
+
+  /* Bionkit badge */
+  .bionkit-badge { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1.1rem; display: flex; align-items: center; gap: 0.85rem; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; }
+  .bionkit-badge:hover { border-color: var(--accent2); box-shadow: 0 2px 12px rgba(139,58,42,0.08); }
+  .bionkit-logo-wrap { width: 44px; height: 44px; flex-shrink: 0; border-radius: 6px; overflow: hidden; background: #111; display: flex; align-items: center; justify-content: center; }
+  .bionkit-logo-wrap img { width: 100%; height: 100%; object-fit: contain; }
+  .badge-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; }
+  .badge-name { font-size: 0.9rem; font-weight: 600; color: var(--fg); }
+  .badge-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.4; margin-top: 0.1rem; }
+
+  /* ── SECTIONS ── */
+  section { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border); }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
+  .section-label { font-family: 'EB Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--fg); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.75; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.2rem 1rem; text-align: center; }
+  .stat-number { font-family: 'EB Garamond', serif; font-size: 2rem; font-weight: 500; color: var(--accent); display: block; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* ── RESEARCH ── */
+  .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .research-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+  .research-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+  .research-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: #fff; font-size: 1rem; }
+  .research-card h3 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .research-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── PUBLICATIONS ── */
+  .pubs-list { display: flex; flex-direction: column; gap: 1rem; }
+  .pub-item { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 1.2rem 1.4rem; transition: border-left-color 0.2s; }
+  .pub-item:hover { border-left-color: var(--accent2); }
+  .pub-authors { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.25rem; }
+  .pub-title { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .pub-venue { font-size: 0.8rem; color: var(--muted); font-style: italic; }
+  .pub-year { display: inline-block; background: var(--hover); border: 1px solid var(--border); border-radius: 3px; font-size: 0.72rem; padding: 0.1rem 0.4rem; color: var(--muted); margin-left: 0.4rem; font-style: normal; vertical-align: middle; }
+  .pubs-footer { margin-top: 1.2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .pubs-note { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+  .scholar-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  .scholar-link:hover { text-decoration: underline; }
+
+  /* ── SUPERVISION ── */
+  .supervision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .supervision-list h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 1rem; font-weight: 500; }
+  .thesis-item { padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .thesis-item:last-child { border-bottom: none; }
+  .thesis-name { font-weight: 500; }
+  .thesis-year { font-size: 0.78rem; color: var(--muted); margin-left: 0.4rem; }
+  .thesis-topic { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; line-height: 1.45; }
+
+  /* ── FUNDING ── */
+  .funding-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .funding-item { display: grid; grid-template-columns: 90px 1fr auto; gap: 1rem; align-items: start; padding: 1rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; }
+  .funding-agency { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); padding-top: 0.1rem; }
+  .funding-title { color: var(--fg); }
+  .funding-year { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+
+  /* ── SPIN-OFF ── */
+  .spinoff-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; display: grid; grid-template-columns: 110px 1fr; gap: 2rem; align-items: start; }
+  .spinoff-logo { width: 110px; height: 110px; border-radius: 8px; overflow: hidden; background: #111; display: flex; align-items: center; justify-content: center; }
+  .spinoff-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .spinoff-name { font-family: 'EB Garamond', serif; font-size: 1.5rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .spinoff-sub { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+  .spinoff-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+  .spinoff-link { color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  .spinoff-link:hover { text-decoration: underline; }
+
+  /* ── AWARDS ── */
+  .awards-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .award-item { padding: 1rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; display: grid; grid-template-columns: 52px 1fr; gap: 1rem; align-items: start; }
+  .award-year { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--accent); font-weight: 500; }
+  .award-title { font-weight: 500; margin-bottom: 0.2rem; }
+  .award-org { color: var(--muted); font-size: 0.78rem; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-item { display: flex; flex-direction: column; gap: 0.2rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border); }
+  .contact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; }
+  .contact-value { font-size: 0.9rem; }
+  .contact-value a { color: var(--accent); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem; font-size: 0.78rem; color: var(--muted); max-width: 1100px; margin: 0 auto; }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-sidebar { display: none; }
+    .about-grid, .contact-grid, .supervision-grid { grid-template-columns: 1fr; }
+    .research-grid { grid-template-columns: 1fr 1fr; }
+    .funding-item { grid-template-columns: 1fr; }
+    .spinoff-card { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">A.E.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#supervision">Supervision</a></li>
+    <li><a href="#funding">Funding</a></li>
+    <li><a href="#spinoff">Bionkit</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-affils">
+      <span class="affil-tag"><span class="affil-dot"></span>Eskişehir Teknik Üniversitesi · Faculty of Science</span>
+      <span class="affil-tag"><span class="affil-dot"></span>Professor of Biochemistry · Head of Biochemistry · CEO, Bionkit</span>
+    </div>
+    <h1>Arzu Ersöz</h1>
+    <p class="hero-subtitle">Professor of Biochemistry &amp; CEO, Bionkit</p>
+    <p class="hero-summary">
+      I develop molecularly imprinted polymers, synthetic receptors, and bioinspired nanomaterials for sensing, separation, and biomedical diagnostics. After postdoctoral work at the University of Kentucky on conducting polymers and electrochemical microsystems, I built a research group at the intersection of biochemistry, analytical chemistry, and materials science — working on QCM biosensors, affinity cryogel columns, 3D-printable bioinks, and nanoenzymes. In 2012 I co-founded Bionkit, commercialising biomimetic separation and diagnostic technologies, and currently serve as its CEO.
+    </p>
+    <div class="hero-links-row">
+      <a href="mailto:arzuersoz@eskisehir.edu.tr">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        arzuersoz@eskisehir.edu.tr
+      </a>
+      <a href="https://scholar.google.com/citations?user=OnRrxokAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Google Scholar
+      </a>
+    </div>
+    <div class="hero-btns">
+      <a href="#research" class="btn btn-primary">View Research ↓</a>
+      <a href="#publications" class="btn btn-outline">Publications</a>
+    </div>
+  </div>
+
+  <div class="hero-sidebar">
+    <div class="hero-image-wrap">
+      <img class="hero-photo" src="data:image/png;base64,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" alt="Prof. Arzu Ersöz">
+    </div>
+    <!-- ESTÜ badge -->
+    <a class="estu-badge" href="https://www.eskisehir.edu.tr" target="_blank" rel="noopener">
+      <div class="estu-logo-wrap">
+        <img src="data:image/png;base64,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" alt="Eskişehir Teknik Üniversitesi">
+      </div>
+    </a>
+    <!-- Bionkit badge -->
+    <a class="bionkit-badge" href="https://www.atap.com.tr/bionkit" target="_blank" rel="noopener">
+      <div class="bionkit-logo-wrap">
+        <img src="data:image/png;base64,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" alt="Bionkit">
+      </div>
+      <div>
+        <div class="badge-label">CEO &amp; Co-founder · 2012</div>
+        <div class="badge-name">Bionkit</div>
+        <div class="badge-desc">Biomimetic separation &amp; diagnostic technologies</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-header"><span class="section-label">About</span><div class="section-line"></div></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Arzu Ersöz is Professor of Biochemistry at the Faculty of Science, Eskişehir Teknik Üniversitesi (ESTÜ), and CEO of Bionkit. She completed her B.Sc. and M.Sc. at ODTÜ (1986, 1988) and her Ph.D. in Analytical Chemistry at Hacettepe University (1998), followed by two postdoctoral fellowships at the University of Kentucky (1999–2001) on conducting polymers, screen-printing, laser micromachining of electrodes, and magnetoelectrochemistry.</p>
+      <p>Her group works at the intersection of biochemistry, analytical chemistry, and nanotechnology. Core themes include molecularly imprinted polymers (MIPs) as synthetic receptors, affinity cryogel columns for biochromatography, QCM and potentiometric biosensors, 3D-printable bioinks, and bioinspired nanoenzymes for catalysis and CO₂ conversion.</p>
+      <p>She co-founded Bionkit in 2012 as a commercial spin-off from Anadolu University, and currently serves as its CEO. She has held the position of Head of Biochemistry since 2010, and has been at ESTÜ since 2018, following appointments at Anadolu University (2001–2018).</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card"><span class="stat-number">100+</span><span class="stat-label">SCI Publications</span></div>
+      <div class="stat-card"><span class="stat-number">20+</span><span class="stat-label">MSc Theses</span></div>
+      <div class="stat-card"><span class="stat-number">10+</span><span class="stat-label">PhD Theses</span></div>
+      <div class="stat-card"><span class="stat-number">30+</span><span class="stat-label">Research Projects</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESEARCH ── -->
+<section id="research">
+  <div class="section-header"><span class="section-label">Research</span><div class="section-line"></div></div>
+  <div class="research-grid">
+    <div class="research-card"><div class="research-icon">⬡</div><h3>Molecular Imprinting</h3><p>Design of MIPs as synthetic receptors for selective recognition of metal ions, biomolecules, pathogens, drugs, and environmental contaminants, using QCM, SPR, and chromatographic readouts.</p></div>
+    <div class="research-card"><div class="research-icon">◈</div><h3>Biosensors &amp; Nanosensors</h3><p>QCM, SPR, and potentiometric platforms for clinical biomarkers — cancer antigens (CA125, PSA), autoimmune markers (citrulline, anti-CCP), and oxidative stress indicators (8-OHdG).</p></div>
+    <div class="research-card"><div class="research-icon">⬜</div><h3>Biochromatography &amp; Cryogels</h3><p>Affinity cryogel columns and monolithic supports for protein, enzyme, and antibody purification; FPLC-integrated systems for hyaluronic acid, IgG, and hemoglobin isolation.</p></div>
+    <div class="research-card"><div class="research-icon">△</div><h3>3D Bioprinting &amp; Bioinks</h3><p>Cellulose- and hydrogel-based bioinks incorporating photo-crosslinkable and self-healing polymers for scaffold fabrication, patches, and organ models for tissue engineering and drug delivery.</p></div>
+    <div class="research-card"><div class="research-icon">○</div><h3>Nanoenzymes &amp; Biomimetics</h3><p>Synthetic enzyme systems — nanolipases, carbonic anhydrase mimics, and RuBisCO nanoenzymes — for biocatalysis and CO₂ conversion via photo-crosslinked polymer architectures.</p></div>
+    <div class="research-card"><div class="research-icon">◇</div><h3>Electrochemistry &amp; Conducting Polymers</h3><p>Electropolymerization of polypyrrole and polyparaphenylene; overoxidized polymer electrodes; magnetoelectrochemistry; ion-selective electrodes; spectroelectrochemistry.</p></div>
+  </div>
+</section>
+
+<!-- ── PUBLICATIONS — most recent first ── -->
+<section id="publications">
+  <div class="section-header"><span class="section-label">Selected Publications</span><div class="section-line"></div></div>
+  <div class="pubs-list">
+    <div class="pub-item">
+      <div class="pub-authors">Ö. Altsoy, Ö.B. Ünlüer, F. Yilmaz, S.E. Diltemiz, D. Hür, A. Ersöz, R. Say</div>
+      <div class="pub-title">Targeting and Bioimaging of Human Lung Cancer Cells via Heteroleptic Iridium Complexes</div>
+      <div class="pub-venue">Inorganica Chimica Acta <span class="pub-year">2026</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">N. Rashidova, R. Say, A. Ersöz</div>
+      <div class="pub-title">Amino Acid Monomer Ligand-Exchanged ZIF-Based Active Site Mimicking of Peroxidase</div>
+      <div class="pub-venue">ChemistrySelect <span class="pub-year">2025</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">Ö.B. Ünlüer, R. Say, A. Ersöz</div>
+      <div class="pub-title">RuBisCO Nano Enzyme for Mimicking CO₂ Conversion System in Plants</div>
+      <div class="pub-venue">Biotechnology and Applied Biochemistry <span class="pub-year">2021</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">Y. Sümbelli, S.E. Diltemiz, M.G. Say, Ö.B. Ünlüer, A. Ersöz, R. Say</div>
+      <div class="pub-title">In situ Non-cytotoxic Cross-linking Strategy for 3D Printable Biomaterials</div>
+      <div class="pub-venue">Soft Matter <span class="pub-year">2021</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">Ş.N. Karuk Elmas, R. Güzel, M.G. Say, A. Ersöz, R. Say</div>
+      <div class="pub-title">Ferritin Based Bionanocages as Novel Biomemory Device Concept</div>
+      <div class="pub-venue">Biosensors and Bioelectronics <span class="pub-year">2018</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">S.E. Diltemiz, R. Keçili, A. Ersöz, R. Say</div>
+      <div class="pub-title">Molecular Imprinting Technology in Quartz Crystal Microbalance (QCM) Sensors <em>(Review)</em></div>
+      <div class="pub-venue">Sensors <span class="pub-year">2017</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">A. Ersöz, S.E. Diltemiz, A.A. Özcan, A. Denizli, R. Say</div>
+      <div class="pub-title">8-OHdG Sensing with MIP Based Solid Phase Extraction and QCM Technique</div>
+      <div class="pub-venue">Sensors and Actuators B: Chemical <span class="pub-year">2009</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">A. Atılır Özcan, R. Say, A. Denizli, A. Ersöz</div>
+      <div class="pub-title">L-Histidine Imprinted Synthetic Receptor for Biochromatography Applications</div>
+      <div class="pub-venue">Analytical Chemistry <span class="pub-year">2006</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">A. Ersöz, A. Denizli, A. Özcan, R. Say</div>
+      <div class="pub-title">Molecularly Imprinted Ligand-Exchange Recognition Assay of Glucose by Quartz Crystal Microbalance</div>
+      <div class="pub-venue">Biosensors and Bioelectronics <span class="pub-year">2005</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">A. Ersöz, J.C. Ball, C.A. Grimes, L.G. Bachas</div>
+      <div class="pub-title">Characterization of Electrochemically Deposited Polypyrrole Using Magnetoelastic Material Transduction Elements</div>
+      <div class="pub-venue">Analytical Chemistry <span class="pub-year">2002</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">A. Ersöz, V.G. Gavalas, L.G. Bachas</div>
+      <div class="pub-title">Potentiometric Behavior of Electrodes Based on Overoxidized Polypyrrole Films</div>
+      <div class="pub-venue">Analytical and Bioanalytical Chemistry <span class="pub-year">2002</span></div>
+    </div>
+    <div class="pub-item">
+      <div class="pub-authors">A. Ersöz, H. Akgün, N.K. Aras</div>
+      <div class="pub-title">Determination of Phytate in Turkish Diets by <sup>31</sup>P-FT-NMR Spectroscopy</div>
+      <div class="pub-venue">Journal of Agricultural and Food Chemistry <span class="pub-year">1990</span></div>
+    </div>
+  </div>
+  <div class="pubs-footer">
+    <span class="pubs-note">Showing 12 representative publications from 100+.</span>
+    <a class="scholar-link" href="https://scholar.google.com/citations?user=OnRrxokAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      Full list on Google Scholar →
+    </a>
+  </div>
+</section>
+
+<!-- ── SUPERVISION — most recent first ── -->
+<section id="supervision">
+  <div class="section-header"><span class="section-label">Supervision</span><div class="section-line"></div></div>
+  <div class="supervision-grid">
+    <div class="supervision-list">
+      <h3>Doctoral Theses</h3>
+      <div class="thesis-item"><span class="thesis-name">Nurana Rashidova</span><span class="thesis-year">2025</span><div class="thesis-topic">Reusable synthetic enzymes with broad substrate specificity</div></div>
+      <div class="thesis-item"><span class="thesis-name">Ender Köse</span><span class="thesis-year">2024</span><div class="thesis-topic">Multifunctional biomimetic proprotein convertase development</div></div>
+      <div class="thesis-item"><span class="thesis-name">Bayram Akkuş</span><span class="thesis-year">2023</span><div class="thesis-topic">Development of mimetic antimicrobial peptides</div></div>
+      <div class="thesis-item"><span class="thesis-name">Güner Saka</span><span class="thesis-year">2022</span><div class="thesis-topic">Synthesis of RGD-based polymers and cell interaction studies</div></div>
+      <div class="thesis-item"><span class="thesis-name">Almila Şenat</span><span class="thesis-year">2021</span><div class="thesis-topic">Oxidative stress evaluation in low birth weight infants</div></div>
+      <div class="thesis-item"><span class="thesis-name">Umut Çelikoğlu</span><span class="thesis-year">2021</span><div class="thesis-topic">Bionanoconjugates for artificial blood applications</div></div>
+      <div class="thesis-item"><span class="thesis-name">Özlem Biçen Ünlüer</span><span class="thesis-year">2015</span><div class="thesis-topic">Nanoenzymes and biocatalysis applications</div></div>
+      <div class="thesis-item"><span class="thesis-name">Özlem Yalçınkaya</span><span class="thesis-year">2015</span><div class="thesis-topic">Citrulline-imprinted nanosensor for disease diagnosis</div></div>
+      <div class="thesis-item"><span class="thesis-name">Sibel Büyüktiryaki</span><span class="thesis-year">2012</span><div class="thesis-topic">Solid-phase protein enrichment systems for proteomics</div></div>
+      <div class="thesis-item"><span class="thesis-name">Ayça Özcan</span><span class="thesis-year">2007</span><div class="thesis-topic">MIP-based artificial receptors for biochromatography</div></div>
+    </div>
+    <div class="supervision-list">
+      <h3>Selected Master's Theses</h3>
+      <div class="thesis-item"><span class="thesis-name">Seher Karabıyık</span><span class="thesis-year">2025</span><div class="thesis-topic">Development of gluten-degrading mimetic enzymes</div></div>
+      <div class="thesis-item"><span class="thesis-name">Çiçek Kır</span><span class="thesis-year">2021</span><div class="thesis-topic">Self-healing hydrogel systems as 3D printing bioinks</div></div>
+      <div class="thesis-item"><span class="thesis-name">Demet Çöçü</span><span class="thesis-year">2020</span><div class="thesis-topic">3D-printed lidocaine-loaded membrane against peritoneal adhesion</div></div>
+      <div class="thesis-item"><span class="thesis-name">Yiğitcan Sümbelli</span><span class="thesis-year">2018</span><div class="thesis-topic">Cellulose-based bioink for nerve cell scaffolds via 3D bioprinting</div></div>
+      <div class="thesis-item"><span class="thesis-name">Halil İbrahim Akbaş</span><span class="thesis-year">2018</span><div class="thesis-topic">Collagen-DOPA-MATRP-Ru 3D hydrogel wound dressing</div></div>
+      <div class="thesis-item"><span class="thesis-name">Sercan Güzel</span><span class="thesis-year">2018</span><div class="thesis-topic">AGO-2 protein purification and RNA binding studies</div></div>
+      <div class="thesis-item"><span class="thesis-name">Ayça Bakır</span><span class="thesis-year">2018</span><div class="thesis-topic">Hyaluronic acid-based targeted nanocarrier systems</div></div>
+      <div class="thesis-item"><span class="thesis-name">Yasemin Uymaz</span><span class="thesis-year">2017</span><div class="thesis-topic">Carbonic anhydrase purification by affinity chromatography</div></div>
+      <div class="thesis-item"><span class="thesis-name">Gözde Yavuz</span><span class="thesis-year">2015</span><div class="thesis-topic">Horseradish peroxidase catalytic column for PEDOT:PSS production</div></div>
+      <div class="thesis-item"><span class="thesis-name">Sibel Büyüktiryaki</span><span class="thesis-year">2005</span><div class="thesis-topic">Mercury preconcentration with methylmercury-imprinted microspheres</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FUNDING — most recent first ── -->
+<section id="funding">
+  <div class="section-header"><span class="section-label">Funding</span><div class="section-line"></div></div>
+  <div class="funding-list">
+    <div class="funding-item"><div class="funding-agency">LÖP</div><div class="funding-title">Exosome-based topical gel with natural compounds for combination vitiligo treatment (PI)</div><div class="funding-year">2025</div></div>
+    <div class="funding-item"><div class="funding-agency">TÜSEB</div><div class="funding-title">Point-of-care spray for rapid detection of cerebrospinal fluid leakage (PI)</div><div class="funding-year">2025</div></div>
+    <div class="funding-item"><div class="funding-agency">TÜBİTAK</div><div class="funding-title">Cryogel-based microneedles for interstitial glucose monitoring (Advisor)</div><div class="funding-year">2024–</div></div>
+    <div class="funding-item"><div class="funding-agency">ESTÜ BAP</div><div class="funding-title">Novel ELISA protein immobilization method (PI)</div><div class="funding-year">2022–2023</div></div>
+    <div class="funding-item"><div class="funding-agency">ESTÜ BAP</div><div class="funding-title">PEDOT:CNC polymer-based 3D-printable hydrogel development (PI)</div><div class="funding-year">2020–2021</div></div>
+    <div class="funding-item"><div class="funding-agency">TÜBİTAK 1511</div><div class="funding-title">Protein nanobead-based pre-enrichment kits for biochemical diagnostics (PI) — 155,667 TL</div><div class="funding-year">2014–2016</div></div>
+    <div class="funding-item"><div class="funding-agency">TÜBİTAK 1511</div><div class="funding-title">Anti-nanobead ELISA kits for early diagnosis of Type 1 diabetes &amp; congenital hypothyroidism (PI) — 261,460 TL</div><div class="funding-year">2014–2016</div></div>
+    <div class="funding-item"><div class="funding-agency">Anadolu Üniv.</div><div class="funding-title">Nanosensor systems for MS and rheumatoid arthritis diagnosis (PI) — 189,591 TL</div><div class="funding-year">2011–2014</div></div>
+    <div class="funding-item"><div class="funding-agency">TÜBİTAK MİSAG</div><div class="funding-title">8-OHdG biosensor using MIP-coated QCM electrodes for DNA oxidative damage detection (PI)</div><div class="funding-year">2007</div></div>
+    <div class="funding-item"><div class="funding-agency">TÜBİTAK MİSAG</div><div class="funding-title">Phenol-selective monolithic materials for capillary electrochromatography (PI)</div><div class="funding-year">2004</div></div>
+  </div>
+</section>
+
+<!-- ── SPIN-OFF ── -->
+<section id="spinoff">
+  <div class="section-header"><span class="section-label">Spin-off Company</span><div class="section-line"></div></div>
+  <div class="spinoff-card">
+    <div class="spinoff-logo">
+      <img src="data:image/png;base64,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" alt="Bionkit logo">
+    </div>
+    <div>
+      <div class="spinoff-name">Bionkit</div>
+      <div class="spinoff-sub">CEO &amp; Co-founder · Founded 2012 · Anadolu University Spin-off · ATAP / ETGB Eskişehir</div>
+      <p class="spinoff-desc">Bionkit was co-founded in 2012 by Prof. Arzu Ersöz and Prof. Rıdvan Say as a commercial spin-off of Anadolu University, based at the Eskişehir Technology Development Zone (ETGB). Prof. Ersöz currently serves as CEO, leading the company's mission to translate molecularly imprinted polymer and biochromatography research into commercial diagnostic and separation products and services. Bionkit received the <strong>Most Successful Woman Entrepreneur 3rd Place</strong> award from ETGB–ATAP in 2023.</p>
+      <a class="spinoff-link" href="https://www.atap.com.tr/bionkit" target="_blank" rel="noopener">atap.com.tr/bionkit →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── AWARDS — most recent first ── -->
+<section id="awards">
+  <div class="section-header"><span class="section-label">Awards &amp; Honours</span><div class="section-line"></div></div>
+  <div class="awards-list">
+    <div class="award-item"><div class="award-year">2023</div><div><div class="award-title">Most Successful Woman Entrepreneur — 3rd Place</div><div class="award-org">ETGB–ATAP, Eskişehir Technology Development Region</div></div></div>
+    <div class="award-item"><div class="award-year">2022</div><div><div class="award-title">ESTÜ25 &amp; ESTÜ50 Thesis Mentorship Awards</div><div class="award-org">Eskişehir Teknik Üniversitesi</div></div></div>
+    <div class="award-item"><div class="award-year">2021</div><div><div class="award-title">ESTÜ25 &amp; ESTÜ50 Thesis Mentorship Awards</div><div class="award-org">Eskişehir Teknik Üniversitesi</div></div></div>
+    <div class="award-item"><div class="award-year">2020</div><div><div class="award-title">Article of the Year Award</div><div class="award-org">Eskişehir Teknik Üniversitesi</div></div></div>
+    <div class="award-item"><div class="award-year">2019</div><div><div class="award-title">ESTÜ25 / ESTÜ50 / ESTÜ100 Article Awards</div><div class="award-org">Eskişehir Teknik Üniversitesi</div></div></div>
+    <div class="award-item"><div class="award-year">2016</div><div><div class="award-title">Platinum &amp; Gold Performance Article Awards</div><div class="award-org">Anadolu Üniversitesi</div></div></div>
+    <div class="award-item"><div class="award-year">2012</div><div><div class="award-title">1st Place — Metallic Ideas R&amp;D Project Fair</div><div class="award-org">Gold recovery using antibody-based separation technology</div></div></div>
+    <div class="award-item"><div class="award-year">2011</div><div><div class="award-title">Grand Prize &amp; 1st Place (Kozmetik Kategorisi)</div><div class="award-org">1st R&amp;D Project Fair, Chemical Materials Sector — Hyaluronic acid chromatographic columns</div></div></div>
+    <div class="award-item"><div class="award-year">2010</div><div><div class="award-title">Best Poster Award</div><div class="award-org">Kromatografi 2010, Erzurum — IgA separation by cryogel columns</div></div></div>
+    <div class="award-item"><div class="award-year">2010</div><div><div class="award-title">1st Mention — Fen Bilimleri ve Mühendislik</div><div class="award-org">Hacettepe Teknokent Life Sciences &amp; Technology Project Competition</div></div></div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-header"><span class="section-label">Contact</span><div class="section-line"></div></div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-item"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:arzuersoz@eskisehir.edu.tr">arzuersoz@eskisehir.edu.tr</a></span></div>
+      <div class="contact-item"><span class="contact-label">Google Scholar</span><span class="contact-value"><a href="https://scholar.google.com/citations?user=OnRrxokAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener">scholar.google.com →</a></span></div>
+      <div class="contact-item"><span class="contact-label">Phone</span><span class="contact-value">(222) 335 0580 / 4818</span></div>
+      <div class="contact-item"><span class="contact-label">Fax</span><span class="contact-value">(222) 320 4910</span></div>
+    </div>
+    <div>
+      <div class="contact-item"><span class="contact-label">Academic Position</span><span class="contact-value">Professor of Biochemistry<br>Head of Biochemistry (since 2010)<br>Eskişehir Teknik Üniversitesi<br>Faculty of Science, 26470 Eskişehir, Turkey</span></div>
+      <div class="contact-item"><span class="contact-label">Industry Position</span><span class="contact-value">CEO, <a href="https://www.atap.com.tr/bionkit" target="_blank" rel="noopener">Bionkit</a> (co-founded 2012)</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Arzu Ersöz · Eskişehir Teknik Üniversitesi · Professor of Biochemistry</p>
+</footer>
+
+</body>
+</html>
